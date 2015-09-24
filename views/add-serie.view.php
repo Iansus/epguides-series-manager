@@ -1,16 +1,16 @@
 <html>
 	<head>
 		<title>Add a serie</title>
-		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>/static/css/style.css" />
-<script type="text/javascript">
-function update(v) {
-	var epg = document.getElementById('epg');
-	var bs = document.getElementById('bs');
+		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
+		<script type="text/javascript">
+			function update(v) {
+				var epg = document.getElementById('epg');
+				var bs = document.getElementById('bs');
 
-	epg.value = v.toLowerCase().replace(' ','').replace('the','');
-	bs.value = v.toLowerCase()+' s{}e[]';
-}
-</script>
+				epg.value = v.toLowerCase().replace(' ','').replace('the','');
+				bs.value = v.toLowerCase()+' s{}e[]';
+			}
+		</script>
 	</head>
 	<body>
 		<h1>Add a serie</h1>

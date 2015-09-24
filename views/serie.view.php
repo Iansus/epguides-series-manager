@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title><?php Functions::echos($args['serie']->get('name')); ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>/static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
 	</head>
 	<body>
 		<h1>
@@ -49,8 +49,8 @@
 			?>
 			<tr>
 				<td>S<?php echo $se; ?>E<?php echo $epstr ?></td>
-				<td><a href="<?php echo $ep->get('link'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>/static/img/extern.svg" /></a></td>
-				<td><a href="http://binsearch.info/index.php?&m=&max=25&adv_g=&adv_age=999&adv_sort=date&minsize=200&maxsize=&font=&postdate=&q=<?php echo ($bs); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>/static/img/extern.svg" /></a></td>
+				<td><a href="<?php echo $ep->get('link'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a></td>
+				<td><a href="http://binsearch.info/index.php?&m=&max=25&adv_g=&adv_age=999&adv_sort=date&minsize=200&maxsize=&font=&postdate=&q=<?php echo ($bs); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a></td>
 				<td><input type="radio" onClick="location.href='set-last-seen.php?id=<?php echo $ep->get('id'); ?>'" /></td>
 				<td><?php echo $airDate; ?></td>
 				<td style="text-align:left"><span class="<?php echo $status; ?>"><?php Functions::echos($ep->get('name')); ?></span></td>

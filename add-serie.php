@@ -46,7 +46,7 @@
 			$serie->set('lastSeenEpisode', 0);
 
 			$serie->save();
-			Functions::redirect($_G['SERVER_ROOT'].'/sync-series.php?id='.$serie->get('id'));
+			Functions::redirect($_G['SERVER_ROOT'].'sync-series.php?id='.$serie->get('id'));
 		}
 	}
 
