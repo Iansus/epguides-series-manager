@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<title><?php Functions::echos($args['serie']->get('name')); ?></title>
+		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>/static/css/style.css" />
+	</head>
+	<body>
+		<h1>
+			<?php Functions::echos($args['serie']->get('name')); ?>
+			[<a href="delete-serie.php?id=<?php echo $args['serie']->get('id'); ?>">Delete</a>]
+			[<a href="index.php">Home</a>]
+		</h1>
+		<table class="allepisodes" cols=5 style="width:100%">
+			<thead>
+				<td style="width:5%">#</td>
+				<td style="width:5%">Summary</td>
+				<td style="width:5%">Binsearch</td>
+				<td style="width:5%">Last seen</td>
+				<td style="width:10%">Air Date</td>
+				<td style="text-align:left">Name</td>
+			</thead>
+			<?php
+
+				$serie = $args['serie'];
+				$lastep = $serie->get('lastSeenEpisode');
+				$lastse = $serie->get('lastSeenSeason');
+
+				$prevse = 1;
+
+				foreach($args['eps'] as $ep)
+				{
+					$epno = $ep->get('episode');
+					$seno = $ep->get('season');
+					$airdate = $ep->get('airDate');
+
+					if($seno!=$prevse) echo '<tr><td>&nbsp;</td></tr>';
+					$prevse = $seno;
+
+					$epstr = str_pad($epno, 2, "0", STR_PAD_LEFT);
+					$se = str_pad($seno, 2, "0", STR_PAD_LEFT);
+
+					$seen = ($seno < $lastse) || ($seno==$lastse && $epno<=$lastep);
+					$status = ($seen)? 'seen' : (($airdate+86400<=time()) ? 'notseen' : 'notaired');
+
+					$bs = $serie->get('binsearchUrl');
+					$bs = str_replace('{}', $se, $bs);
+					$bs = str_replace('[]', $epstr, $bs);
+
+					$airDate = date('d/m/Y', $airdate);
+			?>
+			<tr>
+				<td>S<?php echo $se; ?>E<?php echo $epstr ?></td>
+				<td><a href="<?php echo $ep->get('link'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>/static/img/extern.svg" /></a></td>
+				<td><a href="http://binsearch.info/index.php?&m=&max=25&adv_g=&adv_age=999&adv_sort=date&minsize=200&maxsize=&font=&postdate=&q=<?php echo ($bs); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>/static/img/extern.svg" /></a></td>
+				<td><input type="radio" onClick="location.href='set-last-seen.php?id=<?php echo $ep->get('id'); ?>'" /></td>
+				<td><?php echo $airDate; ?></td>
+				<td style="text-align:left"><span class="<?php echo $status; ?>"><?php Functions::echos($ep->get('name')); ?></span></td>
+			</tr>
+			<?php
+				}
+
+			?>
+		</table>
+	</body>
+</html>

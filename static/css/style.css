@@ -1,0 +1,45 @@
+body {
+	background-color: black;
+	color:white;
+}
+
+a {
+	text-decoration:none; 
+	color:lime;
+}
+
+input[type=text], input[type=submit], input[type=password] {
+	background-color:#222;
+	border-color:white;
+	color:white;
+}
+
+.error { 
+	color:red;
+}
+
+table.allseries  td
+{
+	padding:10px;
+}
+
+.seen {
+	color:white;
+}
+
+.notseen {
+	color:lime;
+}
+
+.notaired {
+	color:red;
+}
+
+table.allepisodes td {
+	text-align:center
+}
+
+thead td{
+	font-weight:bold;
+	color: #99F;
+}

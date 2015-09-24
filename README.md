@@ -23,5 +23,5 @@ There is no access control system for now. I use basic authentication (not inclu
 - set-last-seen.php
 
 If you have a newsgroup account, you can use the Binsearch feature included:
-- {} is replaced with season number on two digits
-- [] is replaced with episode number on two digits
+- `{}` is replaced with season number on two digits
+- `[]` is replaced with episode number on two digits
