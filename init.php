@@ -7,6 +7,8 @@
 
     require_once(MODEL.'basic.php');
 
-	$_G['SERVER_ROOT'] = dirname($_SERVER['PHP_SELF']);
+	$tmp = dirname($_SERVER['PHP_SELF']);
+	$_G['SERVER_ROOT'] = $tmp=='/' ? '' : $tmp;
+
 
 ?>
