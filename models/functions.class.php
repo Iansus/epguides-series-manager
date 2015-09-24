@@ -12,6 +12,15 @@
 			return sha1(time().((string) rand()));
 		}
 
+		public static function setResponse($code)
+		{
+			$test = floor($code/100);
+
+			http_response_code($code);
+
+			if($test >= 4) exit();
+		}
+
 		public static function redirect($url)
 		{
 			header('Location: '.$url);
