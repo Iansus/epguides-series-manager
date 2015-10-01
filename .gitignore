@@ -1,2 +1,4 @@
 *.log
 db.class.php
+.ht*
+static/img/cast/*.*

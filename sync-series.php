@@ -63,6 +63,9 @@
 
 	foreach($allSeries as $serie)
 	{
+		$poster = file_get_contents(Serie::getPoster($serie->get('epguidesUrl')));
+		file_put_contents('static/img/cast/'.$serie->get('id').'.jpg', $poster);
+
 		$page = file_get_contents($serie->get('epguidesUrl'));
 		$sid = $serie->get('id');
 
