@@ -13,7 +13,7 @@
 					?>
 					<td style="text-align:center">
 						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie->get('id'); ?>">
-							<img width=160 height=120 src="<?php echo ($args['posters'][$serie->get('id')]); ?>" />
+							<img width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie->get('id').'.jpg'; ?>" />
 							<br />
 							<?php Functions::echos($serie->get('name')); ?>
 						</a>
@@ -26,6 +26,14 @@
 								 }else
 									echo '<i>no new episode</i>';
 							?>
+							<br />
+							<?php
+								if($args['toAir'][$serie->get('id')]) {
+									echo '<span style="color:red">'; Functions::echos($args['toAir'][$serie->get('id')].' episode(s) to be aired'); echo '</span>';
+								 }else
+									echo '<i>no episode to be aired</i>';
+							?>
+
 						</a>
 					</td>
 					<?php
