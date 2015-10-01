@@ -35,6 +35,6 @@
 
 	$serie->save();
 
-	Functions::redirect($_G['SERVER_ROOT'].'serie.php?id='.$serie->get('id'));
+	Functions::redirect($_G['SERVER_ROOT'].'serie.php?id='.$serie->get('id').'#s'.$ep->get('season').'e'.$ep->get('episode'));
 
 ?>
