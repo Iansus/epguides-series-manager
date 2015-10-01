@@ -35,6 +35,6 @@
 
 	$eps = Episode::search($whereClause, $params);
 
-	loadView('serie', array('serie'=>$s, 'eps'=>$eps));
+	loadView('serie', array('serie'=>$s, 'eps'=>array_reverse($eps)));
 
 ?>
