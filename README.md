@@ -6,6 +6,7 @@ Stay tuned with the latest aired episodes of your favorite series &amp; keep tra
 - Import database.sql to your favorite DBMS
 - Rename `models/db-sample.class.php` to `models/db.class.php`
 - Configure access to DMBS in this file
+- `chmod g+w static/img/cast`
 
 ## Example
 
