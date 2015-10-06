@@ -28,13 +28,13 @@
 	try { $s = new Serie($serieId); }
 	catch(RuntimeException $e) { Functions::redirect($_G['SERVER_ROOT']); }
 
-	$whereClause = 'serie_id = :s';
+	$whereClause = 'serie_id = :s ORDER BY season DESC, episode DESC, air_date DESC';
 	$params = array(
 					array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$s->get('id')),
 				);
 
 	$eps = Episode::search($whereClause, $params);
 
-	loadView('serie', array('serie'=>$s, 'eps'=>array_reverse($eps)));
+	loadView('serie', array('serie'=>$s, 'eps'=>$eps));
 
 ?>
