@@ -7,7 +7,7 @@
 				var epg = document.getElementById('epg');
 				var bs = document.getElementById('bs');
 
-				epg.value = v.toLowerCase().replace(' ','').replace('the','');
+				epg.value = v.toLowerCase().replace(/ /g,'').replace(/^the/ig,'');
 				bs.value = v.toLowerCase()+' s{}e[]';
 			}
 		</script>

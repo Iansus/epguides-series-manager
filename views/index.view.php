@@ -22,14 +22,14 @@
 						<br />
 							<?php
 								if($args['newEp'][$serie->get('id')]) {
-									echo '<span style="color:white">'; Functions::echos($args['newEp'][$serie->get('id')].' new episode(s)'); echo '</span>';
+									echo '<span style="color:red">'; Functions::echos($args['newEp'][$serie->get('id')].' new episode(s)'); echo '</span>';
 								 }else
 									echo '<i>no new episode</i>';
 							?>
 							<br />
 							<?php
 								if($args['toAir'][$serie->get('id')]) {
-									echo '<span style="color:red">'; Functions::echos($args['toAir'][$serie->get('id')].' episode(s) to be aired'); echo '</span>';
+									echo '<span style="color:white">'; Functions::echos($args['toAir'][$serie->get('id')].' episode(s) to be aired'); echo '</span>';
 								 }else
 									echo '<i>no episode to be aired</i>';
 							?>
