@@ -29,9 +29,10 @@
 							<br />
 							<?php
 								if($args['toAir'][$serie->get('id')]) {
-									echo '<span style="color:white">'; Functions::echos($args['toAir'][$serie->get('id')].' episode(s) to be aired'); echo '</span>';
+									echo '<small><span style="color:white">'; Functions::echos($args['toAir'][$serie->get('id')]); echo ' <i>TBA</i>, next on ';
+									Functions::echos(date('d/m/Y', $args['nextAir'][$serie->get('id')])); echo '</span></small>';
 								 }else
-									echo '<i>no episode to be aired</i>';
+									echo '<small><i>no episode to be aired</i></small>';
 							?>
 
 						</a>

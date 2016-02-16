@@ -8,6 +8,11 @@ a {
 	color:lime;
 }
 
+
+td {
+	vertical-align: top;
+}
+
 input[type=text], input[type=submit], input[type=password] {
 	background-color:#222;
 	border-color:white;
