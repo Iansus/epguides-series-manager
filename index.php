@@ -24,6 +24,7 @@
 	$allSeries = Serie::searchForAll();
 	$newEp = array();
 	$toAir = array();
+	$nextAir = array();
 
 	$posters = array();
 	foreach($allSeries as $serie)
@@ -40,7 +41,7 @@
 		$newEpRes = Episode::search($whereClause, $params);
 		$newEp[$serie->get('id')] = count($newEpRes);
 
-		$whereClause = 'serie_id=:i AND (season >:s OR (season=:s AND episode>:e)) AND air_date + 86400 > UNIX_TIMESTAMP()';
+		$whereClause = 'serie_id=:i AND (season >:s OR (season=:s AND episode>:e)) AND air_date + 86400 > UNIX_TIMESTAMP() ORDER BY air_date';
 		$params = array(
 						array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$serie->get('lastSeenSeason')),
 						array('id'=>':e', 'type'=>PDO::PARAM_INT, 'value'=>$serie->get('lastSeenEpisode')),
@@ -49,11 +50,12 @@
 
 		$toAirRes = Episode::search($whereClause, $params);
 		$toAir[$serie->get('id')] = count($toAirRes);
+		$nextAir[$serie->get('id')] = ($toAir[$serie->get('id')]===0) ? '-' : $toAirRes[0]->get('airDate');
 
 	}
 
 
 
-	loadView('index', array('series'=>$allSeries, 'posters'=>$posters, 'newEp'=>$newEp, 'toAir'=>$toAir));
+	loadView('index', array('series'=>$allSeries, 'posters'=>$posters, 'newEp'=>$newEp, 'toAir'=>$toAir, 'nextAir' => $nextAir));
 
 ?>
