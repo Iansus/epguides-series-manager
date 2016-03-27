@@ -23,16 +23,20 @@
 		<form action="" method="POST">
 			<table>
 				<tr>
-					<td>Name :</td>
+					<td>Name:</td>
 					<td><input type="text" name="name" onKeyUp='update(this.value)'/></td>
 				</tr>
 				<tr>
-					<td>Epguides name :</td>
+					<td>Epguides name:</td>
 					<td><input id="epg" type="text" name="epguides" /></td>
 				</tr>
 				<tr>
-					<td>Binsearch name :</td>
+					<td>Binsearch name:</td>
 					<td><input id="bs" type="text" name="binsearch" /></td>
+				</tr>
+				<tr>
+					<td>DPStream Id:</td>
+					<td><input id="dpid" type="text" name="dpid" /></td>
 				</tr>
 				<tr>
 					<td></td>

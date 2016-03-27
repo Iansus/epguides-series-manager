@@ -15,6 +15,7 @@
 				<td style="width:5%">#</td>
 				<td style="width:5%">Summary</td>
 				<td style="width:5%">Binsearch</td>
+				<td style="width:5%">DPStream</td>
 				<td style="width:5%">Last seen</td>
 				<td style="width:10%">Air Date</td>
 				<td style="text-align:left">Name</td>
@@ -52,7 +53,8 @@
 				<td>S<?php echo $se; ?>E<?php echo $epstr ?></td>
 				<td><a href="<?php echo $ep->get('link'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a></td>
 				<td><a href="http://binsearch.info/index.php?&m=&max=25&adv_g=&adv_age=999&adv_sort=date&xminsize=200&maxsize=&font=&postdate=&q=<?php echo ($bs); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a></td>
-				<td><input type="radio" onClick="location.href='set-last-seen.php?id=<?php echo $ep->get('id'); ?>'" /></td>
+				<td><a href="http://www.dpstream.net/serie-<?php echo $serie->get('dpstreamId'); ?>-saison-<?php echo $seno; ?>-episode-<?php echo $epstr; ?>-VOSTFR.html" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a></td>
+<td><input type="radio" onClick="location.href='set-last-seen.php?id=<?php echo $ep->get('id'); ?>'" /></td>
 				<td><a style="color:white" name="<?php echo 's'.$seno.'e'.$epno; ?>"><?php echo $airDate; ?></a></td>
 				<td style="text-align:left"><span class="<?php echo $status; ?>"><?php Functions::echos($ep->get('name')); ?></span></td>
 			</tr>

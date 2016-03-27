@@ -19,6 +19,7 @@
 				$object->addField('name');
 				$object->addField('epguides_url');
 				$object->addField('binsearch_url');
+				$object->addField('dpstream_id');
 				$object->addField('last_seen_season', PDO::PARAM_INT);
 				$object->addField('last_seen_episode', PDO::PARAM_INT);
 				break;

@@ -29,10 +29,12 @@
 		$name = Functions::post('name');
 		$epguides = Functions::post('epguides');
 		$binsearch = Functions::post('binsearch');
+		$dpid = Functions::post('dpid');
 
 		if(is_null($name) || empty($name)) $errors[] = 'Name must not be empty';
 		if(is_null($epguides) || empty($epguides)) $errors[] = 'Epguides name must not be empty';
 		if(is_null($binsearch) || empty($binsearch)) $errors[] = 'Binsearch name must not be empty';
+		if(is_null($dpid) || empty($dpid)) $errors[] = 'DPStream id must not be empty';
 
 		if(count($errors))
 			$error = '<ul class="error"><li>'.implode('</li><li>', $errors).'</li></ul>';
@@ -44,6 +46,7 @@
 			$serie->set('binsearchUrl', $binsearch);
 			$serie->set('lastSeenSeason', 0);
 			$serie->set('lastSeenEpisode', 0);
+			$serie->set('dpstreamId', $dpid);
 
 			$serie->save();
 			Functions::redirect($_G['SERVER_ROOT'].'sync-series.php?id='.$serie->get('id'));
