@@ -34,6 +34,20 @@
 				$object->addField('link');
 				break;
 
+			case 'user':
+				$object->addField('id', PDO::PARAM_INT, true);
+				$object->addField('username');
+				$object->addField('password');
+				$object->addField('store_iv');
+				break;
+
+			case 'token':
+				$object->addField('id', PDO::PARAM_INT, true);
+				$object->addField('user_id');
+				$object->addField('value');
+				$object->addField('last_activity');
+				break;
+
 			default:
 				if (DEBUG) echo ('Fatal error : Unable to load fields for class '.$className.' !');
 				Functions::setResponse(500);
@@ -46,6 +60,8 @@
 			$tables = array(
 				'serie'		=>	'series',
 				'episode'	=>	'episodes',
+				'user'		=>	'users',
+				'token'		=>	'tokens',
 					   );
 
 			if (isset($tables[$tableName]))

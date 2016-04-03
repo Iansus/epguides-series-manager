@@ -4,6 +4,7 @@
 		die('Fatal error: MODEL constant not defined');
 
     define('DEBUG', true);
+	session_start();
 
     require_once(MODEL.'basic.php');
 

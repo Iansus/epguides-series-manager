@@ -16,10 +16,23 @@
 
 	loadClass('serie');
 	loadClass('episode');
+	loadClass('user');
 
 	/* Load SQL Views */
 
 	/* <controller> */
+
+	// Check if user is logged in
+
+	User::populateSessionFromCookie();
+
+	if(!User::isLoggedIn()) Functions::redirect($_G['SERVER_ROOT'].'login.php');
+
+	try { $user = new User($_SESSION['user_id']); }
+	catch(RuntimeException $e) { Functions::redirect($_G['SERVER_ROOT'].'login.php'); }
+
+
+	// MAIN
 
 	$allSeries = Serie::searchForAll();
 	$newEp = array();

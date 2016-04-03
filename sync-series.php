@@ -23,6 +23,8 @@
 
 	/* <controller> */
 
+    // MAIN
+
 	$allSeries = Serie::searchForAll();
 
 	$sid = Functions::get('id');

@@ -4,7 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
 	</head>
 	<body>
-		<h1>All series [<a href="add-serie.php">+</a>] [<a href="sync-series.php">Sync</a>]</h1>
+		<h1>All series [<a href="add-serie.php">+</a>] [<a href="sync-series.php">Sync</a>] [<a href="logout.php">Logout</a>]</h1>
 			<table class="allseries" cols=4 style="margin-left:auto; margin-right:auto">
 			<?php
 				$i=0;
