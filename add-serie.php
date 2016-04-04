@@ -15,6 +15,7 @@
 	/* Load models */
 
 	loadClass('serie');
+	loadClass('user');
 
 	/* Load SQL Views */
 

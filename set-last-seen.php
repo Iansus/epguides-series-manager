@@ -16,6 +16,7 @@
 
 	loadClass('serie');
 	loadClass('episode');
+	loadClass('user');
 
 	/* Load SQL Views */
 
