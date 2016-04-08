@@ -13,7 +13,7 @@ td {
 	vertical-align: top;
 }
 
-input[type=text], input[type=submit], input[type=password] {
+select, input[type=text], input[type=submit], input[type=password] {
 	background-color:#222;
 	border-color:white;
 	color:white;

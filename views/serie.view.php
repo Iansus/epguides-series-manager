@@ -8,7 +8,7 @@
 			<?php Functions::echos($args['serie']->get('name')); ?>
 			[<a href="delete-serie.php?id=<?php echo $args['serie']->get('id'); ?>">Delete</a>]
 			[<a href="index.php">Home</a>]
-			[<a href="#<?php echo 's'.$args['serie']->get('lastSeenSeason').'e'.$args['serie']->get('lastSeenEpisode'); ?>">Go to last seen episode</a>]
+			[<a href="#<?php echo 's'.$args['userSerie']->get('lastSeenSeason').'e'.$args['userSerie']->get('lastSeenEpisode'); ?>">Go to last seen episode</a>]
 		</h1>
 		<table class="allepisodes" cols=5 style="width:100%">
 			<thead>
@@ -23,8 +23,9 @@
 			<?php
 
 				$serie = $args['serie'];
-				$lastep = $serie->get('lastSeenEpisode');
-				$lastse = $serie->get('lastSeenSeason');
+				$userSerie = $args['userSerie'];
+				$lastep = $userSerie->get('lastSeenEpisode');
+				$lastse = $userSerie->get('lastSeenSeason');
 
 				$prevse = 1;
 

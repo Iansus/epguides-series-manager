@@ -17,6 +17,7 @@
 	loadClass('serie');
 	loadClass('episode');
 	loadClass('user');
+	loadClass('userserie');
 
 	/* Load SQL Views */
 
@@ -41,7 +42,20 @@
 	try { $s = new Serie($serieId); }
 	catch(RuntimeException $e) { Functions::redirect($_G['SERVER_ROOT']); }
 
-	$s->delete();
+	$whereClause = 'serie_id = :s AND user_id = :u';
+	$params = array(
+		array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$s->get('id')),
+		array('id'=>':u', 'type'=>PDO::PARAM_INT, 'value'=>$user->get('id')),
+						);
+
+	$userSerie = UserSerie::search($whereClause, $params);
+
+	if(!count($userSerie))
+		Functions::redirect($_G['SERVER_ROOT']);
+	else
+		$userSerie = $userSerie[0];
+
+	$userSerie->delete();
 	Functions::redirect($_G['SERVER_ROOT']);
 
 ?>

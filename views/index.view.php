@@ -12,25 +12,25 @@
 				{
 					?>
 					<td style="text-align:center">
-						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie->get('id'); ?>">
-							<img width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie->get('id').'.jpg'; ?>" />
+						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
+							<img width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie['serie']->get('id').'.jpg'; ?>" />
 							<br />
-							<?php Functions::echos($serie->get('name')); ?>
+							<?php Functions::echos($serie['serie']->get('name')); ?>
 						</a>
-						<a href="<?php echo $serie->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
-						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie->get('id'); ?>">
+						<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
+						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
 						<br />
 							<?php
-								if($args['newEp'][$serie->get('id')]) {
-									echo '<span style="color:red">'; Functions::echos($args['newEp'][$serie->get('id')].' new episode(s)'); echo '</span>';
+								if($args['newEp'][$serie['serie']->get('id')]) {
+									echo '<span style="color:red">'; Functions::echos($args['newEp'][$serie['serie']->get('id')].' new episode(s)'); echo '</span>';
 								 }else
 									echo '<i>no new episode</i>';
 							?>
 							<br />
 							<?php
-								if($args['toAir'][$serie->get('id')]) {
-									echo '<small><span style="color:white">'; Functions::echos($args['toAir'][$serie->get('id')]); echo ' <i>TBA</i>, next on ';
-									Functions::echos(date('d/m/Y', $args['nextAir'][$serie->get('id')])); echo '</span></small>';
+								if($args['toAir'][$serie['serie']->get('id')]) {
+									echo '<small><span style="color:white">'; Functions::echos($args['toAir'][$serie['serie']->get('id')]); echo ' <i>TBA</i>, next on ';
+									Functions::echos(date('d/m/Y', $args['nextAir'][$serie['serie']->get('id')])); echo '</span></small>';
 								 }else
 									echo '<small><i>no episode to be aired</i></small>';
 							?>

@@ -15,6 +15,7 @@
 	/* Load models */
 
 	loadClass('serie');
+	loadClass('userserie');
 	loadClass('user');
 
 	/* Load SQL Views */
@@ -35,7 +36,31 @@
 
 	$error = NULL;
 
-	if(isset($_POST['go']))
+	if(isset($_POST['go1']))
+	{
+		$errors = array();
+
+		$sid = Functions::post('serie');
+
+		if(is_null($sid) || empty($sid)) $errors[] = 'Serie must not be empty';
+
+		if(count($errors))
+			$error = '<ul class="error"><li>'.implode('</li><li>', $errors).'</li></ul>';
+		else
+		{
+			$userSerie = new UserSerie();
+			$userSerie->set('userId', $user->get('id'));
+			$userSerie->set('serieId', $sid);
+			$userSerie->set('lastSeenSeason', 0);
+			$userSerie->set('lastSeenEpisode', 0);
+
+			$userSerie->save();
+
+			Functions::redirect($_G['SERVER_ROOT']);
+		}
+
+	}
+	elseif(isset($_POST['go2']))
 	{
 		$errors = array();
 
@@ -57,15 +82,35 @@
 			$serie->set('name', $name);
 			$serie->set('epguidesUrl', 'http://epguides.com/'.$epguides.'/');
 			$serie->set('binsearchUrl', $binsearch);
-			$serie->set('lastSeenSeason', 0);
-			$serie->set('lastSeenEpisode', 0);
 			$serie->set('dpstreamId', $dpid);
-
 			$serie->save();
+
+			$userSerie = new UserSerie();
+			$userSerie->set('userId', $user->get('id'));
+			$userSerie->set('serieId', $serie->get('id'));
+			$userSerie->set('lastSeenSeason', 0);
+			$userSerie->set('lastSeenEpisode', 0);
+			$userSerie->save();
+
 			Functions::redirect($_G['SERVER_ROOT'].'sync-series.php?id='.$serie->get('id'));
 		}
 	}
 
-	loadView('add-serie', array('error'=>$error));
+	// Display all series
+	$allSeries = Serie::searchForAll();
+
+	// Search for user's series
+	$whereClause = 'user_id = :uid';
+	$params = array(
+		array('id'=>'uid', 'type'=>PDO::PARAM_INT, 'value'=>$user->get('id'))
+	);
+
+	$oUserSeries = UserSerie::search($whereClause, $params);
+	$userSeries = array();
+
+	foreach($oUserSeries as $oSerie)
+		$userSeries[] = $oSerie->get('serieId');
+
+	loadView('add-serie', array('allSeries'=>$allSeries, 'userSeries'=> $userSeries, 'error'=>$error));
 
 ?>

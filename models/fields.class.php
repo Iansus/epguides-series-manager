@@ -20,8 +20,6 @@
 				$object->addField('epguides_url');
 				$object->addField('binsearch_url');
 				$object->addField('dpstream_id');
-				$object->addField('last_seen_season', PDO::PARAM_INT);
-				$object->addField('last_seen_episode', PDO::PARAM_INT);
 				break;
 
 			case 'episode':
@@ -48,6 +46,14 @@
 				$object->addField('last_activity');
 				break;
 
+			case 'userserie':
+				$object->addField('id', PDO::PARAM_INT, true);
+				$object->addField('user_id', PDO::PARAM_INT);
+				$object->addField('serie_id', PDO::PARAM_INT);
+				$object->addField('last_seen_season', PDO::PARAM_INT);
+				$object->addField('last_seen_episode', PDO::PARAM_INT);
+				break;
+
 			default:
 				if (DEBUG) echo ('Fatal error : Unable to load fields for class '.$className.' !');
 				Functions::setResponse(500);
@@ -62,6 +68,7 @@
 				'episode'	=>	'episodes',
 				'user'		=>	'users',
 				'token'		=>	'tokens',
+				'userserie'	=>	'user_series',
 					   );
 
 			if (isset($tables[$tableName]))

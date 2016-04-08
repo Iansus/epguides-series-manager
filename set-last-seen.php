@@ -17,6 +17,7 @@
 	loadClass('serie');
 	loadClass('episode');
 	loadClass('user');
+	loadClass('userserie');
 
 	/* Load SQL Views */
 
@@ -43,10 +44,22 @@
 
 	$serie = new Serie($ep->get('serieId'));
 
-	$serie->set('lastSeenSeason', $ep->get('season'));
-	$serie->set('lastSeenEpisode', $ep->get('episode'));
+	$whereClause = 'user_id = :u AND serie_id = :s';
+	$params = array(
+		array('id'=>':u', 'type'=>PDO::PARAM_INT, 'value'=>$user->get('id')),
+		array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$serie->get('id'))
+	);
 
-	$serie->save();
+	$userSerie = UserSerie::search($whereClause, $params);
+	if(!count($userSerie))
+		Functions::redirect($_G['SERVER_ROOT']);
+	else
+		$userSerie = $userSerie[0];
+
+	$userSerie->set('lastSeenSeason', $ep->get('season'));
+	$userSerie->set('lastSeenEpisode', $ep->get('episode'));
+
+	$userSerie->save();
 
 	Functions::redirect($_G['SERVER_ROOT'].'serie.php?id='.$serie->get('id').'#s'.$ep->get('season').'e'.$ep->get('episode'));
 
