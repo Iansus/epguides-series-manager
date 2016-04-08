@@ -16,20 +16,22 @@
 	/* Load models */
 
 	loadClass('crypto');
+	loadClass('user');
 
 	/* Load SQL Views */
 
 	/* <controller> */
 
-	if($argc<2)
-	{
-		echo 'Usage: '.$argv[0].' <password>'.EOL;
-		exit(1);
-	}
+	$user = new User();
+	$username = readline('Username: ');
+	$password = readline('Password: ');
 
-	$initIv = ($argc>=3) ? $argv[2] : NULL;
+	list($storeIv, $hash) = Crypto::hashPassword($password, NULL);
 
-	list($storeIv, $hash) = Crypto::hashPassword($argv[1], $initIv);
-	echo 'HASH =     '.$hash.EOL;
-	echo 'STORE_IV = '.$storeIv.EOL;
+	$user->set('username', $username);
+	$user->set('password', $hash);
+	$user->set('storeIv', $storeIv);
+
+	$user->save();
+
 ?>
