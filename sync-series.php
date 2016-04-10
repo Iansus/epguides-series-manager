@@ -57,8 +57,8 @@
 	define('SEASON',1);
 	define('EPISODE',2);
 	define('AIR_DATE',3);
-	define('LINK',4);
-	define('NAME',5);
+	define('LINK',6);
+	define('NAME',7);
 	define('ALL',0);
 
 	$res = '';
@@ -74,15 +74,15 @@
 		$page = file_get_contents($serie->get('epguidesUrl'));
 		$sid = $serie->get('id');
 
-		preg_match_all('/[0-9]+\. +([0-9]+)-([0-9]+) +([0-9]+ [a-z]{3} [0-9]+) +\<a([^>]+)\>([^<]+)\<\/a\>/isU', $page, $out);
-
+		preg_match_all('/[0-9]+\.? +([0-9]+)-([0-9]+) +[0-9a-z-_]* +([0-9]+( |\/)[a-z]{3}( |\/)[0-9]+) +\<a([^>]+)\>([^<]+)\<\/a\>/isU', $page, $out);
 		for($i=0; $i<count($out[ALL]); $i++)
 		{
 			$season = $out[SEASON][$i];
 			$episode = $out[EPISODE][$i];
 			$name = $out[NAME][$i];
-			$airDate = strtotime($out[AIR_DATE][$i]);
+			$airDate = strtotime(str_replace("/", " ", $out[AIR_DATE][$i]));
 			$link = preg_replace('/^.*href="([^"]+)".*$/isU', '$1', $out[LINK][$i]);
+			$link = preg_replace("/^.*href='([^']+)'.*$/isU", '$1', $link);
 
 			if(!isset($episodes[$sid][$season][$episode]))
 			{

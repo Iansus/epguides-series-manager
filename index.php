@@ -74,9 +74,8 @@
 		$params = array(
 						array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenSeason')),
 						array('id'=>':e', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenEpisode')),
-						array('id'=>':i', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('id')),
+						array('id'=>':i', 'type'=>PDO::PARAM_INT, 'value'=>$serie['serie']->get('id')),
 					);
-
 		$toAirRes = Episode::search($whereClause, $params);
 		$toAir[$serie['serie']->get('id')] = count($toAirRes);
 		$nextAir[$serie['serie']->get('id')] = ($toAir[$serie['serie']->get('id')]===0) ? '-' : $toAirRes[0]->get('airDate');
