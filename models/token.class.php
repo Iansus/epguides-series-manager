@@ -9,7 +9,7 @@
 
     class Token extends Model
 	{
-		const MAX_IDLE_TIME = 86400;
+		const MAX_IDLE_TIME = 7*86400;
 
 		public static function purgeExpired()
 		{

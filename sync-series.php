@@ -98,10 +98,14 @@
 
 				$e->save();
 			}
-			elseif($episodes[$sid][$season][$episode]['airdate'] != $airDate)
+			else
 			{
 				$ep = new Episode($episodes[$sid][$season][$episode]['id']);
-				$ep->set('airDate', $airDate);
+
+				if($episodes[$sid][$season][$episode]['airdate'] != $airDate)
+					$ep->set('airDate', $airDate);
+
+				$ep->set('name', $name);
 
 				$res .= '[+] Updated episode for '.$serie->get('name').' s'.$season.'e'.$episode."\n";
 
