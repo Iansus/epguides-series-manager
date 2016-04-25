@@ -53,3 +53,10 @@ thead td{
 {
 	border-radius:8px;
 }
+
+.gray-out
+{
+	display:inline;
+	background: #000;
+	opacity:0.2;
+}

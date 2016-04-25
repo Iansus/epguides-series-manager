@@ -36,11 +36,11 @@
 
 	$error = NULL;
 
-	if(isset($_POST['go1']))
+	if(isset($_GET['go1']))
 	{
 		$errors = array();
 
-		$sid = Functions::post('serie');
+		$sid = Functions::get('serie');
 
 		if(is_null($sid) || empty($sid)) $errors[] = 'Serie must not be empty';
 

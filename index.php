@@ -82,8 +82,32 @@
 
 	}
 
+	$allSeries = Serie::searchForAll();
+	$notMySeries = array();
+
+	foreach($allSeries as $serie)
+	{
+		if(isset($newEp[$serie->get('id')]))
+			continue;
+
+		$whereClause = 'serie_id=:s';
+		$params = array(
+			array('id'=>':s', 'type'=>PDO::PARAM_STR, 'value'=>$serie->get('id'))
+		);
+
+		$howManyReq = UserSerie::search($whereClause, $params);
+		$howMany = count($howManyReq);
+
+		$howManyLine = ($howMany) ? $howMany.' watch this serie' : 'Nobody watches this serie';
+		$poster = Serie::getPoster($serie->get('epguidesUrl'));
+
+		$episodes = Episode::search($whereClause, $params);
+
+		$notMySeries[] = array('serie'=>$serie, 'howMany'=>$howManyLine, 'epCount'=>count($episodes));
+
+	}
 
 
-	loadView('index', array('series'=>$userSeries, 'posters'=>$posters, 'newEp'=>$newEp, 'toAir'=>$toAir, 'nextAir' => $nextAir));
+	loadView('index', array('series'=>$userSeries, 'posters'=>$posters, 'newEp'=>$newEp, 'toAir'=>$toAir, 'nextAir' => $nextAir, 'notMySeries' => $notMySeries));
 
 ?>

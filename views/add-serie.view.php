@@ -26,7 +26,7 @@
 			<tr>
 				<td style="width:20%">
 					<h3>Existing serie:</h3>
-					<form action="" method="POST">
+					<form action="" method="GET">
 						<select name="serie">
 						<?php
 
