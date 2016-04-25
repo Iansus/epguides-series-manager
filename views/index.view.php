@@ -13,7 +13,7 @@
 					?>
 					<td style="text-align:center">
 						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
-							<img width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie['serie']->get('id').'.jpg'; ?>" />
+							<img class='img-round' width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie['serie']->get('id').'.jpg'; ?>" />
 							<br />
 							<?php Functions::echos($serie['serie']->get('name')); ?>
 						</a>

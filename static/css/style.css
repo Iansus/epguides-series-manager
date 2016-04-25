@@ -48,3 +48,8 @@ thead td{
 	font-weight:bold;
 	color: #99F;
 }
+
+.img-round
+{
+	border-radius:8px;
+}
