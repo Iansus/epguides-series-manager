@@ -6,8 +6,10 @@
 			function update(v) {
 				var epg = document.getElementById('epg');
 				var bs = document.getElementById('bs');
+				var ad7 = document.getElementById('addic7edid');
 
 				epg.value = v.toLowerCase().replace(/ /g,'').replace(/^the/ig,'');
+				ad7.value = v.toLowerCase().replace(/ /g,'_');
 				bs.value = v.toLowerCase()+' s{}e[]';
 			}
 		</script>
@@ -65,6 +67,10 @@
 							<tr>
 								<td>DPStream Id:</td>
 								<td><input id="dpid" type="text" name="dpid" /></td>
+							</tr>
+							<tr>
+								<td>Addic7ed Id:</td>
+								<td><input id="addic7edid" type="text" name="addic7edid" /></td>
 							</tr>
 							<tr>
 								<td></td>

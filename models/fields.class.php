@@ -20,6 +20,7 @@
 				$object->addField('epguides_url');
 				$object->addField('binsearch_url');
 				$object->addField('dpstream_id');
+				$object->addField('addic7ed_id');
 				break;
 
 			case 'episode':

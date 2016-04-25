@@ -68,11 +68,13 @@
 		$epguides = Functions::post('epguides');
 		$binsearch = Functions::post('binsearch');
 		$dpid = Functions::post('dpid');
+		$addic7edid = Functions::post('addic7edid');
 
 		if(is_null($name) || empty($name)) $errors[] = 'Name must not be empty';
 		if(is_null($epguides) || empty($epguides)) $errors[] = 'Epguides name must not be empty';
 		if(is_null($binsearch) || empty($binsearch)) $errors[] = 'Binsearch name must not be empty';
 		if(is_null($dpid) || empty($dpid)) $errors[] = 'DPStream id must not be empty';
+		if(is_null($addic7edid) || empty($addic7edid)) $errors[] = 'Addic7ed id must not be empty';
 
 		if(count($errors))
 			$error = '<ul class="error"><li>'.implode('</li><li>', $errors).'</li></ul>';
@@ -83,6 +85,7 @@
 			$serie->set('epguidesUrl', 'http://epguides.com/'.$epguides.'/');
 			$serie->set('binsearchUrl', $binsearch);
 			$serie->set('dpstreamId', $dpid);
+			$serie->set('addic7edId', $addic7edid);
 			$serie->save();
 
 			$userSerie = new UserSerie();
