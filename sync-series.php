@@ -51,7 +51,10 @@
 		if(!isset($episodes[$sid][$se_id]))
 			$episodes[$sid][$se_id] = array();
 
-		$episodes[$sid][$se_id][$ep->get('episode')] = array('id'=>$ep->get('id'), 'airdate'=>$ep->get('airDate'));
+		$se_id = (int) $se_id;
+		$ep_id = (int) $ep->get('episode');
+
+		$episodes[$sid][$se_id][$ep_id] = array('id'=>$ep->get('id'), 'airdate'=>$ep->get('airDate'));
 	}
 
 	define('SEASON',1);
@@ -62,6 +65,8 @@
 	define('ALL',0);
 
 	$res = '';
+
+	print_r($episodes);
 
 	foreach($allSeries as $serie)
 	{
@@ -77,8 +82,8 @@
 		preg_match_all('/[0-9]+\.? +([0-9]+)-([0-9]+) +[0-9a-z-_]* +([0-9]+( |\/)[a-z]{3}( |\/)[0-9]+) +\<a([^>]+)\>([^<]+)\<\/a\>/isU', $page, $out);
 		for($i=0; $i<count($out[ALL]); $i++)
 		{
-			$season = $out[SEASON][$i];
-			$episode = $out[EPISODE][$i];
+			$season = (int) $out[SEASON][$i];
+			$episode = (int) $out[EPISODE][$i];
 			$name = $out[NAME][$i];
 			$airDate = strtotime(str_replace("/", " ", $out[AIR_DATE][$i]));
 			$link = preg_replace('/^.*href="([^"]+)".*$/isU', '$1', $out[LINK][$i]);
@@ -86,6 +91,7 @@
 
 			if(!isset($episodes[$sid][$season][$episode]))
 			{
+
 				$e = new Episode();
 				$e->set('serieId', $sid);
 				$e->set('season', $season);
@@ -94,7 +100,8 @@
 				$e->set('link', $link);
 				$e->set('airDate', $airDate);
 
-				$res .= '[+] New episode for '.$serie->get('name').' s'.$season.'e'.$episode."\n";
+				if(!isset($_SERVER['SERVER_NAME']))
+					echo '[+] New episode for '.$serie->get('name').' s'.$season.'e'.$episode."\n";
 
 				$e->save();
 			}
@@ -107,7 +114,8 @@
 
 				$ep->set('name', $name);
 
-				$res .= '[+] Updated episode for '.$serie->get('name').' s'.$season.'e'.$episode."\n";
+				if(!isset($_SERVER['SERVER_NAME']))
+					echo '[+] Updated episode for '.$serie->get('name').' s'.$season.'e'.$episode."\n";
 
 				$ep->save();
 			}
@@ -115,5 +123,4 @@
 	}
 
 	Functions::redirect($_G['SERVER_ROOT']);
-	echo (isset($_SERVER['SERVER_NAME'])) ? nl2br($res) : $res;
 ?>
