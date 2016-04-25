@@ -53,7 +53,7 @@
 							<?php Functions::echos($serie['serie']->get('name')); ?>
 						</a>
 						<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
-						<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
+						<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $serie['serie']->get('id'); ?>">
 						<br />
 						<?php echo $serie['epCount']; ?> episode(s)
 						<br />
