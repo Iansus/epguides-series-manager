@@ -42,7 +42,6 @@
 				}
 			?>
 			<?php
-				$i=0;
 				foreach($args['notMySeries'] as $serie)
 				{
 					?>
