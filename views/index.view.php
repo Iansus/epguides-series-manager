@@ -55,7 +55,22 @@
 						<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
 						<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $serie['serie']->get('id'); ?>">
 						<br />
-						<?php echo $serie['epCount']; ?> episode(s)
+						Episodes:
+<?php
+
+	if($serie['epOut'])
+		echo $serie['epOut'].' out';
+
+	if($serie['epOut'] && $serie['epToAir'])
+		echo ' / ';
+
+	if($serie['epToAir'])
+		echo '<span style="color:red">'.$serie['epToAir'].' TBA</span>';
+
+	if(!$serie['epOut'] && !$serie['epToAir'])
+		echo '<i>no</i>';
+
+?>
 						<br />
 						<small style="color:white"><?php echo $serie['howMany']; ?></small></div>
 					</td>
