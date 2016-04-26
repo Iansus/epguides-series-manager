@@ -66,8 +66,6 @@
 
 	$res = '';
 
-	print_r($episodes);
-
 	foreach($allSeries as $serie)
 	{
 		$pUrl = Serie::getPoster($serie->get('epguidesUrl'));
