@@ -100,7 +100,7 @@
 	}
 
 	// Display all series
-	$allSeries = Serie::searchForAll();
+	$allSeries = Serie::searchForAll('name ASC');
 
 	// Search for user's series
 	$whereClause = 'user_id = :uid';

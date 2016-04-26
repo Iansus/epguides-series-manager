@@ -45,11 +45,15 @@
 
 	foreach($oUserSeries as $oUserSerie)
 	{
-		$userSeries[] = array(
-			'serie'=>(new Serie($oUserSerie->get('serieId'))),
+		$s = new Serie($oUserSerie->get('serieId'));
+		$idx = $s->get('name').'-'.$s->get('id');
+		$userSeries[$idx] = array(
+			'serie'=>$s,
 			'userSerie'=>$oUserSerie,
 		);
 	}
+
+	ksort($userSeries);
 
 	$newEp = array();
 	$toAir = array();
@@ -83,7 +87,7 @@
 	}
 
 	// Series not added yet
-	$allSeries = Serie::searchForAll();
+	$allSeries = Serie::searchForAll('name ASC');
 	$notMySeries = array();
 
 	foreach($allSeries as $serie)
