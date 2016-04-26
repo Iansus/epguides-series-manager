@@ -2,6 +2,7 @@
 	<head>
 		<title>Add a serie</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/navbar.css" />
 		<script type="text/javascript">
 			function update(v) {
 				var epg = document.getElementById('epg');
@@ -15,17 +16,24 @@
 		</script>
 	</head>
 	<body>
-		<h1>Add a serie to your list</h1>
+		<table id="navbar">
+			<tr>
+				<td style="width:25%">New serie</td>
+				<td style="width:auto"></td>
+				<td style="width:15%" class="border"><a href="index.php">Home</a></td>
+				<td style="width:10%" class="border"><a href="logout.php">Logout</a></td>
+			</tr>
+		</table>
 		<?php
 
 			if(!is_null($args['error']))
 				echo ($args['error']);
 
 		?>
-		<table cols=2 style="width:100%">
+		<table cols=2 style="width:80%; margin-left:auto; margin-right:auto">
 			<tr>
-				<td style="width:20%">
-					<h3>Existing serie:</h3>
+				<td style="width:50%">
+					<h3 class="notSeen">Existing serie:</h3>
 					<form action="" method="GET">
 						<select name="serie">
 						<?php
@@ -49,7 +57,7 @@
 					</form>
 				</td>
 				<td>
-					<h3>Or add a new one:</h3>
+					<h3 class="notSeen">Or add a new one:</h3>
 					<form action="" method="POST">
 						<table>
 							<tr>

@@ -1,11 +1,13 @@
 body {
-	background-color: black;
-	color:white;
+	background-color: #EEE;
+	color:black;
+	font-family: Calibri;
+	margin: 0px;
 }
 
 a {
 	text-decoration:none; 
-	color:lime;
+	color:#0075D0;
 }
 
 
@@ -14,9 +16,11 @@ td {
 }
 
 select, input[type=text], input[type=submit], input[type=password] {
-	background-color:#222;
-	border-color:white;
-	color:white;
+	background-color:#DDD;
+	border:1px solid black;
+	border-radius:4px;
+	padding-left:4px;
+	padding-right:4px;
 }
 
 .error { 
@@ -28,15 +32,16 @@ table.allseries  td
 	padding:10px;
 }
 
-.seen {
-	color:white;
+
+.seen, .tba {
+	color:black;
 }
 
 .notseen {
-	color:lime;
+	color:#0075D0;
 }
 
-.notaired {
+.notaired, .newep {
 	color:red;
 }
 
@@ -46,17 +51,17 @@ table.allepisodes td {
 
 thead td{
 	font-weight:bold;
-	color: #99F;
+	color: #0075D0;
 }
 
 .img-round
 {
 	border-radius:8px;
+	border:1px solid black;
 }
 
 .gray-out
 {
 	display:inline;
-	background: #000;
-	opacity:0.2;
+	opacity:0.4;
 }

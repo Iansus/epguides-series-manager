@@ -1,0 +1,31 @@
+#navbar
+{
+	width: 100%;
+	background: black;
+	border-bottom: 4px solid #0075D0;
+	color:white;
+	font-size:2em;
+	padding-left:1%;
+	padding-right:1%;
+	padding-top:4px;
+	padding-bottom:4px;
+	margin-bottom:20px;
+}
+
+#navbar td:first-child
+{
+	color: #0075D0;
+	text-align:left;
+	font-weight:bold;
+}
+
+#navbar td.border
+{
+	border-left:4px solid #0075D0;
+	text-align:center;
+}
+
+#navbar a
+{
+	color:white;
+}
