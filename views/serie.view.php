@@ -9,7 +9,7 @@
 			<tr>
 				<td style="width:25%"><?php Functions::echos($args['serie']->get('name')); ?></td>
 				<td style="width:auto"></td>
-				<td style="width:15%" class="border"><a href="delete-serie.php?id=<?php echo $args['serie']->get('id'); ?>">Delete serie</a></td>
+				<td style="width:15%" class="border"><a href="delete-serie.php?id=<?php echo $args['serie']->get('id'); ?>">Delete series</a></td>
 				<td style="width:10%" class="border"><a href="index.php">Home</a></td>
 				<td style="width:10%" class="border"><a href="logout.php">Logout</a></td>
 			</tr>

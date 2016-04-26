@@ -18,7 +18,7 @@
 	<body>
 		<table id="navbar">
 			<tr>
-				<td style="width:25%">New serie</td>
+				<td style="width:25%">New series</td>
 				<td style="width:auto"></td>
 				<td style="width:15%" class="border"><a href="index.php">Home</a></td>
 				<td style="width:10%" class="border"><a href="logout.php">Logout</a></td>
@@ -33,7 +33,7 @@
 		<table cols=2 style="width:80%; margin-left:auto; margin-right:auto">
 			<tr>
 				<td style="width:50%">
-					<h3 class="notSeen">Existing serie:</h3>
+					<h3 class="notSeen">Existing series:</h3>
 					<form action="" method="GET">
 						<select name="serie">
 						<?php

@@ -9,7 +9,7 @@
 			<tr>
 				<td style="width:25%">All series</td>
 				<td style="width:auto"></td>
-				<td style="width:15%" class="border"><a href="add-serie.php">Add a serie</a></td>
+				<td style="width:15%" class="border"><a href="add-serie.php">Add a series</a></td>
 				<td style="width:10%" class="border"><a href="logout.php">Logout</a></td>
 			</tr>
 		</table>
