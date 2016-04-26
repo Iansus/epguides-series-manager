@@ -73,7 +73,7 @@
 								<td><input id="bs" type="text" name="binsearch" /></td>
 							</tr>
 							<tr>
-								<td>DPStream Id:</td>
+								<td>DPStream Id<small>*</small>:</td>
 								<td><input id="dpid" type="text" name="dpid" /></td>
 							</tr>
 							<tr>
@@ -86,6 +86,11 @@
 							</tr>
 						</table>
 					</form>
+					<br />
+					<small>
+						* Search for "[serie] dpstream" on Google and grab the ID in the URL.<br />
+						Example for <i>The Walking Dead</i> : <a href="https://www.google.fr/#q=the+walkign+dead+dpstream" target="_blank">Google</a> then "2506-the-walking-dead".
+					</small>
 				</td>
 			</tr>
 		</table>
