@@ -17,6 +17,8 @@
 	loadClass('token');
 	loadClass('user');
 	loadClass('crypto');
+	loadClass('serie');
+	loadClass('episode');
 
 	/* Load SQL Views */
 
@@ -59,6 +61,10 @@
 		}
 	}
 
-		loadView('login');
+	$users = User::searchForAll();
+	$series = Serie::searchForAll();
+	$episodes = Episode::searchForAll();
+
+	loadView('login', array('userCount'=> count($users), 'sCount'=>count($series), 'epCount'=>count($episodes)));
 
 ?>
