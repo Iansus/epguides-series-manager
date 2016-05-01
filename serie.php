@@ -62,6 +62,9 @@
 
 	$eps = Episode::search($whereClause, $params);
 
-	loadView('serie', array('serie'=>$s, 'eps'=>$eps, 'userSerie'=>$userSerie));
+	$whereClause= 'serie_id = :s';
+	$usersWatching = UserSerie::search($whereClause, $params);
+
+	loadView('serie', array('serie'=>$s, 'eps'=>$eps, 'userSerie'=>$userSerie, 'userCount'=>count($usersWatching)));
 
 ?>
