@@ -11,7 +11,8 @@
 		if(!defined('MODEL'))
 		{
 			if(defined('DEBUG') && DEBUG) echo 'Fatal error : can\'t load class '.$cName.' : MODEL not defined';
-			else return;
+
+			return;
 		}
 
 		$const = getConstantName($fileName);
@@ -39,7 +40,8 @@
 		if(!defined('VIEW'))
 		{
 			if(defined('DEBUG') && DEBUG) echo 'Fatal error : can\'t load view '.$vName.' : VIEW not defined';
-			else return;
+
+			return;
 		}
 
 		$filename = VIEW.$vName.'.view.php';
