@@ -23,8 +23,8 @@
 					$_SESSION['user_id'] = $token;
 			}
 
-			if(User::isLoggedIn())
-				setcookie('token', $_SESSION['user_id'], time()+Token::MAX_IDLE_TIME, "/", "", false,true);
+			if(User::isLoggedIn() && isset($_SESSION['token']))
+				setcookie('token', $_SESSION['token'], time()+Token::MAX_IDLE_TIME, "/", "", false,true);
 
 		}
 
@@ -41,6 +41,7 @@
 			$token->save();
 
 			setcookie('token', $value, time()+Token::MAX_IDLE_TIME, "/", "", false, true);
+			$_SESSION['token'] = $value;
 		}
 
 		public static function logout()
