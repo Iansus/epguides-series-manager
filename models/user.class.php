@@ -17,8 +17,15 @@
 
 		public static function populateSessionFromCookie()
 		{
-			if(!User::isLoggedIn() && isset($_COOKIE['token']))
-				$_SESSION['user_id'] = Token::getUserIdFromToken($_COOKIE['token']);
+			if(!User::isLoggedIn() && isset($_COOKIE['token'])) {
+				$token = Token::getUserIdFromToken($_COOKIE['token']);
+				if (!is_null($token))
+					$_SESSION['user_id'] = $token;
+			}
+
+			if(User::isLoggedIn())
+				setcookie('token', $_SESSION['user_id'], time()+Token::MAX_IDLE_TIME, "/", "", false,true);
+
 		}
 
 		public static function login($userId)
