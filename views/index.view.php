@@ -66,7 +66,7 @@
 					<?php
 
 						if($serie['epOut'])
-							echo $serie['epOut'].' out (last '.strftime('%d/%m/%Y', $serie['lastAired']->get('airDate')).')';
+							echo $serie['epOut'].' (last '.strftime('%d/%m/%Y', $serie['lastAired']->get('airDate')).')';
 
 						if($serie['epOut'] && $serie['epToAir'])
 							echo ' / ';
