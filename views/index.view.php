@@ -27,14 +27,14 @@
 					</a>
 					<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
 					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
-					<br />
+					<br /><small>
 						<?php
 							if($args['newEp'][$serie['serie']->get('id')]) {
 								echo '<span class="newEp">'; Functions::echos($args['newEp'][$serie['serie']->get('id')].' new episode(s)'); echo '</span>';
 							 }else
 								echo '<i>no new episode</i>';
 						?>
-						<br />
+						</small><br />
 						<?php
 							if($args['toAir'][$serie['serie']->get('id')]) {
 								echo '<small><span class="tba">'; Functions::echos($args['toAir'][$serie['serie']->get('id')]); echo ' <i>TBA</i>, next on ';
@@ -42,7 +42,6 @@
 							 }else
 								echo '<small><i>no episode to be aired</i></small>';
 						?>
-
 					</a>
 				</td>
 				<?php
@@ -63,11 +62,11 @@
 					<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
 					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $serie['serie']->get('id'); ?>">
 					<br />
-					Episodes:
+					<small>
 					<?php
 
 						if($serie['epOut'])
-							echo $serie['epOut'].' out';
+							echo $serie['epOut'].' out (last '.strftime('%d/%m/%Y', $serie['lastAired']->get('airDate')).')';
 
 						if($serie['epOut'] && $serie['epToAir'])
 							echo ' / ';
@@ -79,6 +78,7 @@
 							echo '<i>no</i>';
 
 					?>
+					</small>
 					<br />
 					<small class="tba"><?php echo $serie['howMany']; ?></small></div>
 				</td>

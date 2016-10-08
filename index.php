@@ -106,13 +106,13 @@
 		$howManyLine = ($howMany) ? $howMany.' watch this serie' : 'Nobody watches this serie';
 		$poster = Serie::getPoster($serie->get('epguidesUrl'));
 
-		$whereClause = 'serie_id=:s AND air_date + 86400 <= UNIX_TIMESTAMP()';
+		$whereClause = 'serie_id=:s AND air_date + 86400 <= UNIX_TIMESTAMP() ORDER BY air_date DESC';
 		$epOut = Episode::search($whereClause, $params);
 
 		$whereClause = 'serie_id=:s AND air_date + 86400 > UNIX_TIMESTAMP()';
 		$epToAir = Episode::search($whereClause, $params);
 
-		$notMySeries[] = array('serie'=>$serie, 'howMany'=>$howManyLine, 'epOut'=>count($epOut), 'epToAir'=>count($epToAir));
+		$notMySeries[] = array('serie'=>$serie, 'howMany'=>$howManyLine, 'epOut'=>count($epOut), 'epToAir'=>count($epToAir), 'lastAired'=>$epOut[0]);
 
 	}
 
