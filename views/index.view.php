@@ -29,7 +29,14 @@
 					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $o['serie']->get('id'); ?>">
 					<br />
                     <small>
-                        <span class="tba"><?php echo $o['howMany'].' user(s) watching'; ?></span>
+                        <span class="tba">
+                            <?php 
+                            
+                                $s = $o['howMany']>1 ? 's' : '';
+                                echo $o['howMany'].' user'.$s.' watching'; 
+                                
+                            ?>
+                        </span>
                         <br />
 						<?php
                             
@@ -80,7 +87,14 @@
 					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $o['serie']->get('id'); ?>">
 					<br />
                     <small>
-                        <span class="tba"><?php echo $o['howMany'].' user(s) watching'; ?></span>
+                        <span class="tba">
+                            <?php 
+                            
+                                $s = $o['howMany']>1 ? 's' : '';
+                                echo $o['howMany'].' user'.$s.' watching'; 
+                                
+                            ?>
+                        </span>
                         <br />
                         <?php
                             
