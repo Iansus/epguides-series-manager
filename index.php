@@ -55,34 +55,52 @@
 
 	ksort($userSeries);
 
-	$newEp = array();
-	$toAir = array();
-	$nextAir = array();
+	$mySeries = array();
 
 	$posters = array();
 	foreach($userSeries as $serie)
 	{
-		$posters[$serie['serie']->get('id')] = 	Serie::getPoster($serie['serie']->get('epguidesUrl'));
+        $sid = $serie['serie']->get('id');
+        $mySeries[$sid] = array('serie'=>$serie['serie']);
+        
+		$posters[$sid] = Serie::getPoster($serie['serie']->get('epguidesUrl'));
 
-		$whereClause = 'serie_id=:i AND (season >:s OR (season=:s AND episode>:e)) AND air_date + 86400 <= UNIX_TIMESTAMP()';
+        $whereClause = 'serie_id=:s';
+		$params = array(
+			array('id'=>':s', 'type'=>PDO::PARAM_STR, 'value'=>$sid)
+		);
+
+		$howManyReq = UserSerie::search($whereClause, $params);
+		$mySeries[$sid]['howMany'] = count($howManyReq);
+        
+        // To see
+		$whereClause = 'serie_id=:i AND (season >:s OR (season=:s AND episode>:e)) AND air_date + 86400 <= UNIX_TIMESTAMP() ORDER BY air_date DESC';
 		$params = array(
 						array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenSeason')),
 						array('id'=>':e', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenEpisode')),
 						array('id'=>':i', 'type'=>PDO::PARAM_INT, 'value'=>$serie['serie']->get('id')),
 					);
 
-		$newEpRes = Episode::search($whereClause, $params);
-		$newEp[$serie['serie']->get('id')] = count($newEpRes);
+		$toSeeRes = Episode::search($whereClause, $params);
+		$mySeries[$sid]['toSee'] = $toSeeRes;
 
-		$whereClause = 'serie_id=:i AND (season >:s OR (season=:s AND episode>:e)) AND air_date + 86400 > UNIX_TIMESTAMP() ORDER BY air_date';
+        // Aired
+		$whereClause = 'serie_id=:i AND air_date + 86400 <= UNIX_TIMESTAMP() ORDER BY air_date DESC';
 		$params = array(
-						array('id'=>':s', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenSeason')),
-						array('id'=>':e', 'type'=>PDO::PARAM_INT, 'value'=>$serie['userSerie']->get('lastSeenEpisode')),
 						array('id'=>':i', 'type'=>PDO::PARAM_INT, 'value'=>$serie['serie']->get('id')),
 					);
+
+		$toSeeRes = Episode::search($whereClause, $params);
+		$mySeries[$sid]['aired'] = $toSeeRes;
+
+        // To air
+		$whereClause = 'serie_id=:i AND air_date + 86400 > UNIX_TIMESTAMP() ORDER BY air_date ASC';
+		$params = array(
+						array('id'=>':i', 'type'=>PDO::PARAM_INT, 'value'=>$serie['serie']->get('id')),
+					);
+                    
 		$toAirRes = Episode::search($whereClause, $params);
-		$toAir[$serie['serie']->get('id')] = count($toAirRes);
-		$nextAir[$serie['serie']->get('id')] = ($toAir[$serie['serie']->get('id')]===0) ? '-' : $toAirRes[0]->get('airDate');
+		$mySeries[$sid]['toAir'] = $toAirRes;
 
 	}
 
@@ -92,31 +110,33 @@
 
 	foreach($allSeries as $serie)
 	{
-		if(isset($newEp[$serie->get('id')]))
+        $sid = $serie->get('id');
+		if(isset($mySeries[$sid]))
 			continue;
 
+        $notMySeries[$sid] = array();
+        $notMySeries[$sid]['serie'] = $serie;
+		$posters[$sid] = Serie::getPoster($serie->get('epguidesUrl'));
+        
 		$whereClause = 'serie_id=:s';
 		$params = array(
 			array('id'=>':s', 'type'=>PDO::PARAM_STR, 'value'=>$serie->get('id'))
 		);
 
 		$howManyReq = UserSerie::search($whereClause, $params);
-		$howMany = count($howManyReq);
+		$notMySeries[$sid]['howMany'] = count($howManyReq);
 
-		$howManyLine = ($howMany) ? $howMany.' watch this serie' : 'Nobody watches this serie';
-		$poster = Serie::getPoster($serie->get('epguidesUrl'));
 
 		$whereClause = 'serie_id=:s AND air_date + 86400 <= UNIX_TIMESTAMP() ORDER BY air_date DESC';
-		$epOut = Episode::search($whereClause, $params);
+		$aired = Episode::search($whereClause, $params);
+        $notMySeries[$sid]['aired'] = $aired;
 
-		$whereClause = 'serie_id=:s AND air_date + 86400 > UNIX_TIMESTAMP()';
-		$epToAir = Episode::search($whereClause, $params);
-
-		$notMySeries[] = array('serie'=>$serie, 'howMany'=>$howManyLine, 'epOut'=>count($epOut), 'epToAir'=>count($epToAir), 'lastAired'=>$epOut[0]);
-
+		$whereClause = 'serie_id=:s AND air_date + 86400 > UNIX_TIMESTAMP() ORDER BY air_date ASC';
+		$toAir = Episode::search($whereClause, $params);
+        $notMySeries[$sid]['toAir'] = $toAir;
 	}
 
 
-	loadView('index', array('series'=>$userSeries, 'posters'=>$posters, 'newEp'=>$newEp, 'toAir'=>$toAir, 'nextAir' => $nextAir, 'notMySeries' => $notMySeries));
+	loadView('index', array('series'=>$userSeries, 'mySeries' => $mySeries, 'notMySeries' => $notMySeries, 'posters'=>$posters));
 
 ?>

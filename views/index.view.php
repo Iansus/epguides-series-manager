@@ -16,32 +16,49 @@
 		<table class="allseries" cols=4 style="margin-left:auto; margin-right:auto">
 		<?php
 			$i=0;
-			foreach($args['series'] as $serie)
+			foreach($args['mySeries'] as $o)
 			{
 				?>
 				<td style="text-align:center">
-					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
-						<img class='img-round' width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie['serie']->get('id').'.jpg'; ?>" />
+					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $o['serie']->get('id'); ?>">
+						<img class='img-round' width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$o['serie']->get('id').'.jpg'; ?>" />
 						<br />
-						<?php Functions::echos($serie['serie']->get('name')); ?>
+						<?php Functions::echos($o['serie']->get('name')); ?>
 					</a>
-					<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
-					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $serie['serie']->get('id'); ?>">
-					<br /><small>
+					<a href="<?php echo $o['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
+					<a href="<?php echo $_G['SERVER_ROOT']; ?>serie.php?id=<?php echo $o['serie']->get('id'); ?>">
+					<br />
+                    <small>
+                        <span class="tba"><?php echo $o['howMany'].' user(s) watching'; ?></span>
+                        <br />
 						<?php
-							if($args['newEp'][$serie['serie']->get('id')]) {
-								echo '<span class="newEp">'; Functions::echos($args['newEp'][$serie['serie']->get('id')].' new episode(s)'); echo '</span>';
-							 }else
-								echo '<i>no new episode</i>';
+                            
+                            // Aired
+                            $airedLine = count($o['aired']) ? 
+                                'Last on '.date('Y-m-d', $o['aired'][0]->get('airDate')) :
+                                'No episode out';
+                            
+                            $nToSee = count($o['toSee']);
+                            $airedLine .= $nToSee ? ' ('.$nToSee.' to see)' : '';
+                                
+                            $bonus = $nToSee ? ' class="newep"' : '';
+                            echo '<span'.$bonus.'>'.$airedLine.'</span>';
+                        
 						?>
-						</small><br />
+						<br />
 						<?php
-							if($args['toAir'][$serie['serie']->get('id')]) {
-								echo '<small><span class="tba">'; Functions::echos($args['toAir'][$serie['serie']->get('id')]); echo ' <i>TBA</i>, next on ';
-								Functions::echos(date('d/m/Y', $args['nextAir'][$serie['serie']->get('id')])); echo '</span></small>';
-							 }else
-								echo '<small><i>no episode to be aired</i></small>';
+							
+                            // To air
+                            $nTBA = count($o['toAir']);
+                            $toAirLine = $nTBA ?
+                                'Next on '.date('Y-m-d', $o['toAir'][0]->get('airDate')).' ('.$nTBA.' TBA)' :
+                                'No episode to be added';
+                                
+                            $bonus = !$nTBA ? ' class="tba"' : '';
+                            echo '<span'.$bonus.'>'.$toAirLine.'</span>';
 						?>
+                        <br />
+                    </small>
 					</a>
 				</td>
 				<?php
@@ -49,38 +66,48 @@
 			}
 		?>
 		<?php
-			foreach($args['notMySeries'] as $serie)
+			foreach($args['notMySeries'] as $o)
 			{
 				?>
 				<td style="text-align:center">
-					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $serie['serie']->get('id'); ?>">
+					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $o['serie']->get('id'); ?>">
 						<div class="gray-out">
-							<img class='img-round' width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$serie['serie']->get('id').'.jpg'; ?>" />
+							<img class='img-round' width=160 height=120 src="<?php echo $_G['SERVER_ROOT'].'static/img/cast/'.$o['serie']->get('id').'.jpg'; ?>" />
 						<br />
-						<?php Functions::echos($serie['serie']->get('name')); ?>
+						<?php Functions::echos($o['serie']->get('name')); ?>
 					</a>
-					<a href="<?php echo $serie['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
-					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $serie['serie']->get('id'); ?>">
+					<a href="<?php echo $o['serie']->get('epguidesUrl'); ?>" target="_blank"><img src="<?php echo $_G['SERVER_ROOT']; ?>static/img/extern.svg" /></a>
+					<a href="<?php echo $_G['SERVER_ROOT']; ?>add-serie.php?go1&serie=<?php echo $o['serie']->get('id'); ?>">
 					<br />
-					<small>
-					<?php
-
-						if($serie['epOut'])
-							echo $serie['epOut'].' (last '.strftime('%d/%m/%Y', $serie['lastAired']->get('airDate')).')';
-
-						if($serie['epOut'] && $serie['epToAir'])
-							echo ' / ';
-
-						if($serie['epToAir'])
-							echo '<span class="newEp">'.$serie['epToAir'].' TBA</span>';
-
-						if(!$serie['epOut'] && !$serie['epToAir'])
-							echo '<i>no</i>';
-
-					?>
-					</small>
+                    <small>
+                        <span class="tba"><?php echo $o['howMany'].' user(s) watching'; ?></span>
+                        <br />
+                        <?php
+                            
+                            // Aired
+                            $nOut = count($o['aired']);
+                            $airedLine = $nOut ? 
+                                'Last on '.date('Y-m-d', $o['aired'][0]->get('airDate')).' ('.$nOut.' out)' :
+                                'No episode out';
+                            
+                            $bonus = '';
+                            echo '<span'.$bonus.'>'.$airedLine.'</span>';
+                        
+                        ?>
+                        <br />
+                        <?php
+                            
+                            // To air
+                            $nTBA = count($o['toAir']);
+                            $toAirLine = $nTBA ?
+                                'Next on '.date('Y-m-d', $o['toAir'][0]->get('airDate')).' ('.$nTBA.' TBA)' :
+                                'No episode to be added';
+                                
+                            $bonus = !$nTBA ? ' class="tba"' : '';
+                            echo '<span'.$bonus.'>'.$toAirLine.'</span>';
+                        ?>
+                    </small>
 					<br />
-					<small class="tba"><?php echo $serie['howMany']; ?></small></div>
 				</td>
 				<?php
 				if(++$i%6==0) echo '</tr><tr>';
