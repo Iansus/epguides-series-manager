@@ -128,7 +128,8 @@
 
 			foreach($this->fields as $sql_field)
 			{
-				$prep->bindValue(':'.$sql_field['sql_name'], $this->$sql_field['name'], $sql_field['type']);
+                $fname = $sql_field['name'];
+				$prep->bindValue(':'.$sql_field['sql_name'], $this->$fname, $sql_field['type']);
 			}
 
 			$prep->execute();
@@ -171,7 +172,8 @@
 
 			foreach($this->fields as $sql_field)
 			{
-				$value = (!$sql_field['uniqid'] || $preserveOldValue) ? $this->$sql_field['name'] : 0;
+				$fname = $sql_field['name'];
+                $value = (!$sql_field['uniqid'] || $preserveOldValue) ? $this->$fname : 0;
 				$prep->bindValue(':'.$sql_field['sql_name'], $value, $sql_field['type']);
 			}
 
@@ -207,7 +209,8 @@
 			{
 				if($sql_field['uniqid'])
 				{
-					$prep->bindValue($sql_field['sql_name'], $this->$sql_field['name'], $sql_field['type']);
+                    $fname = $sql_field['name'];
+					$prep->bindValue($sql_field['sql_name'], $this->$fname, $sql_field['type']);
 				}
 			}
 
@@ -303,7 +306,8 @@
 
 			foreach($this->fields as $sql_field)
 			{
-				$this->$sql_field['name'] = $results[0]->get($sql_field['name']);
+                $fname = $sql_field['name'];
+				$this->$fname = $results[0]->get($sql_field['name']);
 			}
 		}
 
