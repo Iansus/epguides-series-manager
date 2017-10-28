@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Login page</title>
+		<link rel="shortcut icon" href="/static/img/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/navbar.css" />
 	</head>

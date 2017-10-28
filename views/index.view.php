@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>All series</title>
+		<link rel="shortcut icon" href="/static/img/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $_G['SERVER_ROOT']; ?>static/css/navbar.css" />
 	</head>
@@ -30,37 +31,37 @@
 					<br />
                     <small>
                         <span class="tba">
-                            <?php 
-                            
+                            <?php
+
                                 $s = $o['howMany']>1 ? 's' : '';
-                                echo $o['howMany'].' user'.$s.' watching'; 
-                                
+                                echo $o['howMany'].' user'.$s.' watching';
+
                             ?>
                         </span>
                         <br />
 						<?php
-                            
+
                             // Aired
-                            $airedLine = count($o['aired']) ? 
+                            $airedLine = count($o['aired']) ?
                                 'Last on '.date('Y-m-d', $o['aired'][0]->get('airDate')) :
                                 'No episode out';
-                            
+
                             $nToSee = count($o['toSee']);
                             $airedLine .= $nToSee ? ' ('.$nToSee.' to see)' : '';
-                                
+
                             $bonus = $nToSee ? ' class="newep"' : '';
                             echo '<span'.$bonus.'>'.$airedLine.'</span>';
-                        
+
 						?>
 						<br />
 						<?php
-							
+
                             // To air
                             $nTBA = count($o['toAir']);
                             $toAirLine = $nTBA ?
                                 'Next on '.date('Y-m-d', $o['toAir'][0]->get('airDate')).' ('.$nTBA.' TBA)' :
                                 'No episode to be added';
-                                
+
                             $bonus = !$nTBA ? ' class="tba"' : '';
                             echo '<span'.$bonus.'>'.$toAirLine.'</span>';
 						?>
@@ -88,35 +89,35 @@
 					<br />
                     <small>
                         <span class="tba">
-                            <?php 
-                            
+                            <?php
+
                                 $s = $o['howMany']>1 ? 's' : '';
-                                echo $o['howMany'].' user'.$s.' watching'; 
-                                
+                                echo $o['howMany'].' user'.$s.' watching';
+
                             ?>
                         </span>
                         <br />
                         <?php
-                            
+
                             // Aired
                             $nOut = count($o['aired']);
-                            $airedLine = $nOut ? 
+                            $airedLine = $nOut ?
                                 'Last on '.date('Y-m-d', $o['aired'][0]->get('airDate')).' ('.$nOut.' out)' :
                                 'No episode out';
-                            
+
                             $bonus = '';
                             echo '<span'.$bonus.'>'.$airedLine.'</span>';
-                        
+
                         ?>
                         <br />
                         <?php
-                            
+
                             // To air
                             $nTBA = count($o['toAir']);
                             $toAirLine = $nTBA ?
                                 'Next on '.date('Y-m-d', $o['toAir'][0]->get('airDate')).' ('.$nTBA.' TBA)' :
                                 'No episode to be added';
-                                
+
                             $bonus = !$nTBA ? ' class="tba"' : '';
                             echo '<span'.$bonus.'>'.$toAirLine.'</span>';
                         ?>
